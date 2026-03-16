@@ -31,6 +31,7 @@ public abstract class Character
     {
         Name = name;
         Level = level;
+        CharacterSheet.SaveNewSheet(this);
     }
 
     public string getAttributes()
