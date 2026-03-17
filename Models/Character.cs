@@ -1,7 +1,12 @@
 ﻿namespace CharacterSheetJSON.Models;
 
 using CharacterSheetJSON.Models.Enums;
+using System.Text.Json.Serialization;
 
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "Class")]
+[JsonDerivedType(typeof(Barbarian), typeDiscriminator: "Barbarian")]
+[JsonDerivedType(typeof(Rogue), typeDiscriminator: "Rogue")]
+[JsonDerivedType(typeof(Wizard), typeDiscriminator: "Wizard")]
 public abstract class Character
 {
     public string Name { get; set; }
@@ -31,7 +36,6 @@ public abstract class Character
     {
         Name = name;
         Level = level;
-        CharacterSheet.SaveNewSheet(this);
     }
 
     public string getAttributes()
